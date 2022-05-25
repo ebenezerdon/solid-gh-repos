@@ -1,19 +1,28 @@
 import { Route, Routes } from 'solid-app-router'
-import { Component } from 'solid-js'
-import FavRepos from './components/FavRepos'
-import Trends from './components/Trends'
+import { Component, createEffect, createSignal, lazy } from 'solid-js'
+import Nav from './components/Nav'
+const Home = lazy(() => import('./pages/Home'))
+const SavedRepos = lazy(() => import('./pages/SavedRepos'))
 
-const route = window.location.pathname
+const [username, setUserName] = createSignal('ebenezerdon')
+const [repos, setRepos] = createSignal([])
 
-console.log(`route: ${route}`)
+createEffect(async () => {
+  const res = await fetch(`https://api.github.com/users/${username()}/repos?sort=created`)
+  setRepos(await res.json())
+})
 
 const App: Component = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Trends />} />
-      <Route path="/favrepos" element={<FavRepos />} />
-    </Routes>
+    <div class="container">
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favrepos" element={<SavedRepos />} />
+      </Routes>
+    </div>
   )
 }
 
+export { username, setUserName, repos }
 export default App
