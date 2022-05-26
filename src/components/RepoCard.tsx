@@ -18,6 +18,7 @@ interface Props {
 
 const saveRepo = (repo: Repo) => {
   setSavedRepos([repo, ...savedRepos()])
+  localStorage.setItem('savedRepos', JSON.stringify(savedRepos()))
 }
 
 const unsaveRepo = (repoId: string) => {
