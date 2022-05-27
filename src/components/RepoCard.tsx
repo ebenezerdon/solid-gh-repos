@@ -23,6 +23,7 @@ const saveRepo = (repo: Repo) => {
 
 const unsaveRepo = (repoId: string) => {
   setSavedRepos(savedRepos()?.filter((item) => item.id !== repoId))
+  localStorage.setItem('savedRepos', JSON.stringify(savedRepos()))
 }
 
 const repoIsSaved = (repoId: string) => {
