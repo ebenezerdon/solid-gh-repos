@@ -1,3 +1,12 @@
+## GitHub Repos App with SolidJS and TypeScript
+
+[Link to the tutorial](https://youtu.be/WDodWU-B-aY)
+
+[Link to the hosted app](https://solid-gh-repos.netlify.app)
+
+[Follow me on LinkedIn](https://linkedin.com/in/ebenezerdon)
+
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
