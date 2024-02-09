@@ -1,11 +1,11 @@
 import { Component, For, Show, createResource, createSignal } from 'solid-js'
 import RepoCard, { Repo } from '../components/RepoCard'
 
-const Home: Component = () => {
-  const date = new Date()
-  date.setDate(date.getDate() - 7)
-  const formattedDate = date.toISOString().split('T')[0]
+const date = new Date()
+date.setDate(date.getDate() - 7)
+const formattedDate = date.toISOString().split('T')[0]
 
+const Home: Component = () => {
   const [username, setUserName] = createSignal('')
   const baseUrl = 'https://api.github.com'
 

@@ -1,17 +1,11 @@
-import { Route, Routes } from 'solid-app-router'
-import { Component, lazy } from 'solid-js'
+import { Component, ComponentProps } from 'solid-js'
 import Nav from './components/Nav'
-const Home = lazy(() => import('./pages/Home'))
-const SavedRepos = lazy(() => import('./pages/SavedRepos'))
 
-const App: Component = () => {
+const App: Component = (props: ComponentProps<'div'>) => {
   return (
     <div class="container">
       <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/favrepos" element={<SavedRepos />} />
-      </Routes>
+      {props.children}
     </div>
   )
 }
