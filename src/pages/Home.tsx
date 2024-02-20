@@ -15,8 +15,12 @@ const Home: Component = () => {
     const url = username ? userReposUrl : trendingReposUrl
 
     const res = await fetch(url)
-    const data = await res.json()
-    return data.items || data
+
+    if (!res.ok || res.status === 404) return []
+    else {
+      const data = await res.json()
+      return data.items || data
+    }
   }
 
   const [repos] = createResource(username, fetchRepos)
@@ -34,7 +38,6 @@ const Home: Component = () => {
       <Show when={repos.loading}>
         <p>Loading...</p>
       </Show>
-
       <form class="mb-3" onSubmit={handleSubmit}>
         <input type="text" class="p-1 align-middle" placeholder="Type username..." name="username" />
 
@@ -45,6 +48,9 @@ const Home: Component = () => {
 
       <Show when={username()} fallback={<h1>Most starred repos since {formattedDate}</h1>}>
         <h1>GitHub repos for {username()}</h1>
+      </Show>
+      <Show when={repos()?.length === 0}>
+        <p>No repos found. Try another username.</p>
       </Show>
       <For each={repos()}>{(repo: Repo) => <RepoCard repo={repo} />}</For>
     </div>
