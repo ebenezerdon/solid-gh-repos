@@ -21,10 +21,12 @@ const Home: Component = () => {
 
   const [repos] = createResource(username, fetchRepos)
 
-  const refetchRepos = (event: Event) => {
+  const handleSubmit = (event: Event) => {
     event.preventDefault()
-    const usernameInput = document.querySelector('#usernameInput') as HTMLInputElement
-    setUserName(usernameInput.value)
+    const form = event.currentTarget as HTMLFormElement
+    const formData = new FormData(form)
+    const usernameInput = formData.get('username') as string
+    setUserName(usernameInput)
   }
 
   return (
@@ -33,8 +35,8 @@ const Home: Component = () => {
         <p>Loading...</p>
       </Show>
 
-      <form class="mb-3" onSubmit={(event) => refetchRepos(event)}>
-        <input type="text" class="p-1 align-middle" placeholder="Type username..." id="usernameInput" />
+      <form class="mb-3" onSubmit={handleSubmit}>
+        <input type="text" class="p-1 align-middle" placeholder="Type username..." name="username" />
 
         <button class="btn btn-dark ms-3 w-auto" type="submit">
           Fetch
