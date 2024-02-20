@@ -42,7 +42,7 @@ const Home: Component = () => {
       </form>
 
       <Show when={username()} fallback={<h1>Most starred repos since {formattedDate}</h1>}>
-        <h3>GitHub repos for {username()}</h3>
+        <h1>GitHub repos for {username()}</h1>
       </Show>
       <For each={repos()}>{(repo: Repo) => <RepoCard repo={repo} />}</For>
     </div>
